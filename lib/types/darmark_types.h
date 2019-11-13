@@ -15,8 +15,9 @@ const long SIGNED_LONG		0b00000100
 const long SIGNED_FLOAT		0b00001000
 const long STRING		0b00010000
 
- /* Below are some checker functions - these are for the plugins to be able to safely cast
- * */
+ /*
+  * Below are some checker functions - these are for the plugins to be able to safely cast
+  * */
 
 bool is_unsigned_long(darmark_type type);
 
