@@ -9,11 +9,11 @@ typedef struct{
  * Darmark Basic Type Definitions - This may expand later
  * */
 
-const long UNSIGNED_LONG	0b00000001
-const long UNSIGNED_FLOAT	0b00000010
-const long SIGNED_LONG		0b00000100
-const long SIGNED_FLOAT		0b00001000
-const long STRING		0b00010000
+#define UNSIGNED_LONG	  0b00000001
+#define UNSIGNED_FLOAT	0b00000010
+#define SIGNED_LONG		  0b00000100
+#define SIGNED_FLOAT		0b00001000
+#define STRING		      0b00010000
 
  /*
   * Below are some checker functions - these are for the plugins to be able to safely cast
