@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace EireScript
 {
@@ -17,7 +18,14 @@ namespace EireScript
 
         public bool Execute()
         {
-            GlobalScope.Variables.Add(this.Name, this);
+            if(GlobalScope.Variables.TryGetValue(this.Name, out IVariable variable))
+            {
+                GlobalScope.Variables[this.Name] = this;
+            }
+            else
+            {
+                GlobalScope.Variables.Add(this.Name, this);
+            }
             return true;
         }
 
@@ -25,11 +33,13 @@ namespace EireScript
         {
             if (input.Contains("=") &&
                input.Split('=') is string[] assignment &&
-               assignment.Length == 2)
+               assignment.Length > 1 &&
+               Regex.Matches(assignment[1], "\"([^\"]*)\"") is MatchCollection quoteMatch &&
+               quoteMatch.Count > 0)
             {
                 VarCommand varCommand = new VarCommand();
                 varCommand.Name = assignment[0].Trim();
-                varCommand.Value = assignment[1].Replace("\"", "").Trim();
+                varCommand.Value = quoteMatch[0].ToString().Replace("\"", "");
                 return varCommand;
             }
             return new NoOpCommand();

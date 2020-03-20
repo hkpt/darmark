@@ -9,32 +9,35 @@ namespace EireScript
     class PrintCommand : ICommand
     {
         public string Name => "print";
-
-        private string valueToPrint = string.Empty;
-
+        public string Value { get; set; }
         public void AddCommand(ICommand command)
         {
         }
 
         public bool Execute()
         {
-            Console.Write(this.valueToPrint);
+            string val = string.Empty;
+            if (Value.Split(' ') is string[] splitInput &&
+               splitInput.Length > 0)
+            {
+                if (Value.Contains("\""))
+                {
+                    val = splitInput[0].Replace("\"", "");
+                }
+                else
+                {
+                    val = GlobalScope.Variables[splitInput[0]].Value;
+                }
+            }
+            Console.Write(val);
             return true;
         }
 
         public ICommand Initialise(string input)
         {
-            if(input.Split(' ') is string[] splitInput &&
-               splitInput.Length > 0)
-            if (input.Contains("\""))
-            {
-                this.valueToPrint = input.Replace("\"", "");
-            }
-            else
-            {
-                this.valueToPrint = GlobalScope.Variables[splitInput[0]].Value;
-            }
-            return this;
+            PrintCommand print = new PrintCommand();
+            print.Value = input;
+            return print;
         }
     }
 }
