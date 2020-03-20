@@ -1,6 +1,6 @@
 ﻿using Darmark.Properties;
+using DarmarkCommon;
 using EireScript;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 
@@ -10,12 +10,8 @@ namespace Darmark
     {
         static void Main(string[] args)
         {
-            IConfigurationRoot configs = new ConfigurationBuilder().AddCommandLine(args).Build();
-            string[] InputFiles = configs[Resources.InputCommandLineParameter]?.Split(Resources.InputCommandLineParameterDelimiter)
-                                                                               .Select(fn => fn.Trim())
-                                                                               .ToArray();
-            Compiler compiler = new Compiler(InputFiles);
-            compiler.Compile();
+            DamarkApplication application = new DamarkApplication();
+            application.Run(args);
         }
     }
 }
