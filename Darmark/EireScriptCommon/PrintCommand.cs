@@ -18,19 +18,21 @@ namespace EireScript
 
         public bool Execute()
         {
-            Console.WriteLine(this.valueToPrint);
+            Console.Write(this.valueToPrint);
             return true;
         }
 
         public ICommand Initialise(string input)
         {
+            if(input.Split(' ') is string[] splitInput &&
+               splitInput.Length > 0)
             if (input.Contains("\""))
             {
                 this.valueToPrint = input.Replace("\"", "");
             }
             else
             {
-                this.valueToPrint = GlobalScope.Variables[input].Value;
+                this.valueToPrint = GlobalScope.Variables[splitInput[0]].Value;
             }
             return this;
         }

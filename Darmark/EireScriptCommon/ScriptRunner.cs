@@ -21,6 +21,7 @@ namespace EireScript
             {
                 new ExitCommand(),
                 new PrintCommand(),
+                new PrintLnCommand(),
                 new VarCommand()
             };
         }
@@ -60,10 +61,12 @@ namespace EireScript
         private IEnumerable<ICommand> EvalCommands(string inputString)
         {
             IEnumerable<string> tokens = inputString.Split(' ');
+            int count = 0;
             foreach(string inputToken in tokens)
             {
+                ++count;
                 ICommand command = this.reservedCommands.SingleOrDefault(cmd => cmd.Name == inputToken);
-                yield return command?.Initialise(string.Join(" ", tokens.Skip(1).ToArray())) ?? new NoOpCommand();
+                yield return command?.Initialise(string.Join(" ", tokens.Skip(count).ToArray())) ?? new NoOpCommand();
             }
         }
 
