@@ -9,6 +9,7 @@ namespace DarmarkCommon
         string Help { get; }
         bool Initialise(string[] args);
         bool Initialise(IPluginSettings pluginSettings);
+        bool Initialise();
         bool Execute();
     }
 }

@@ -8,7 +8,6 @@ namespace EireScript
 {
     public class ScriptRunner : IPlugin
     {
-        ICollection<ICommand> reservedCommands;
         public string Name => "script";
 
         public string Help => "--input \"filename|filename2|...\" Input script filenames";
@@ -17,13 +16,6 @@ namespace EireScript
 
         public ScriptRunner()
         {
-            this.reservedCommands = new ICommand[]
-            {
-                new ExitCommand(),
-                new PrintCommand(),
-                new PrintLnCommand(),
-                new VarCommand()
-            };
         }
 
         public bool Execute(object args)
@@ -46,6 +38,18 @@ namespace EireScript
             return true;
         }
 
+        public void Execute(string line)
+        {
+            ICommand executableCommand = new CommandsRunner();
+
+            foreach (ICommand command in this.EvalCommands(line))
+            {
+                executableCommand.AddCommand(command);
+            }
+
+            executableCommand.Execute();
+        }
+
         private ICommand ReadConsoleCommands()
         {
             ICommand executableCommand = new CommandsRunner();
@@ -65,7 +69,7 @@ namespace EireScript
             foreach(string inputToken in tokens)
             {
                 ++count;
-                ICommand command = this.reservedCommands.SingleOrDefault(cmd => cmd.Name == inputToken);
+                ICommand command = GlobalScope.ReservedCommands.SingleOrDefault(cmd => cmd.Name == inputToken);
                 yield return command?.Initialise(string.Join(" ", tokens.Skip(count).ToArray())) ?? new NoOpCommand();
             }
         }
@@ -81,7 +85,12 @@ namespace EireScript
 
         public bool Initialise(IPluginSettings pluginSettings)
         {
-            return false;
+            return true;
+        }
+
+        public bool Initialise()
+        {
+            return true;
         }
     }
 }
