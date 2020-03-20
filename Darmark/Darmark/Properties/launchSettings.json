@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Darmark": {
+      "commandName": "Project",
+      "commandLineArgs": "--input \"codefile.eire | confile2.eire\""
+    }
+  }
+}

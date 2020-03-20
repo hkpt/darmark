@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Darmark", "Darmark\Darmark.csproj", "{0832930A-3C3E-46D7-A784-31144412DEAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EireScript", "EireScript\EireScript.csproj", "{ECE33364-A39F-4AE8-886A-1B9D2724161D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0832930A-3C3E-46D7-A784-31144412DEAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0832930A-3C3E-46D7-A784-31144412DEAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0832930A-3C3E-46D7-A784-31144412DEAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0832930A-3C3E-46D7-A784-31144412DEAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE33364-A39F-4AE8-886A-1B9D2724161D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE33364-A39F-4AE8-886A-1B9D2724161D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE33364-A39F-4AE8-886A-1B9D2724161D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE33364-A39F-4AE8-886A-1B9D2724161D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AC38B08-A3D9-40AD-A491-25EBAE469A2D}
+	EndGlobalSection
+EndGlobal
