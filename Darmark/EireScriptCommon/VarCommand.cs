@@ -7,9 +7,9 @@ namespace EireScript
 {
     public class VarCommand : IVariable
     {
-        public string Name { get; private set; } = "var";
+        public string Name { get; set; } = "var";
 
-        public string Value { get; private set; }
+        public string Value { get; set; }
 
         public void AddCommand(ICommand command)
         {
@@ -17,18 +17,22 @@ namespace EireScript
 
         public bool Execute()
         {
+            GlobalScope.Variables.Add(this.Name, this);
             return true;
         }
 
-        public void Initialise(string input)
+        public ICommand Initialise(string input)
         {
-            if(input.Contains("=") &&
+            if (input.Contains("=") &&
                input.Split('=') is string[] assignment &&
                assignment.Length == 2)
             {
-                this.Name = assignment[0];
-                this.Value = assignment[1].Replace("\"", "");
+                VarCommand varCommand = new VarCommand();
+                varCommand.Name = assignment[0].Trim();
+                varCommand.Value = assignment[1].Replace("\"", "").Trim();
+                return varCommand;
             }
+            return new NoOpCommand();
         }
     }
 }

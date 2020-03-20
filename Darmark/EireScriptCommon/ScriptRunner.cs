@@ -20,7 +20,8 @@ namespace EireScript
             this.reservedCommands = new ICommand[]
             {
                 new ExitCommand(),
-                new PrintCommand()
+                new PrintCommand(),
+                new VarCommand()
             };
         }
 
@@ -61,9 +62,8 @@ namespace EireScript
             IEnumerable<string> tokens = inputString.Split(' ');
             foreach(string inputToken in tokens)
             {
-                ICommand command = this.reservedCommands.SingleOrDefault(cmd => cmd.Name == inputToken);                ;
-                command?.Initialise(string.Join(" ", tokens.Skip(1).ToArray()));
-                yield return  command ?? new NoOpCommand();
+                ICommand command = this.reservedCommands.SingleOrDefault(cmd => cmd.Name == inputToken);
+                yield return command?.Initialise(string.Join(" ", tokens.Skip(1).ToArray())) ?? new NoOpCommand();
             }
         }
 

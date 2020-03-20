@@ -30,8 +30,9 @@ namespace EireScript
             return returnFlag;
         }
 
-        public void Initialise(string input)
+        public ICommand Initialise(string input)
         {
+            return this;
         }
     }
 }
