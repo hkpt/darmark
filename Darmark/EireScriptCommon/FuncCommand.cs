@@ -33,10 +33,9 @@ namespace EireScript
                 GlobalScope.Functions.Add(this.Name, this);
             }
             string line = string.Empty;
-            while (true)
+            while (GlobalScope.InputReader.GetString(out string input))
             {
-                if(Console.ReadLine() is string input
-                    && input != ":end")
+                if(input != ":end")
                 {
                     this.Commands.Add(input);
                 }else

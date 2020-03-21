@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace EireScript
@@ -26,15 +27,27 @@ namespace EireScript
         public bool Execute()
         {
             Console.WriteLine("EireScript Intepreter");
-            if(this.inputFiles == null)
+            if(this.inputFiles != null)
             {
-                ICommand scriptIn;
-                do
+                foreach (string inputFile in inputFiles)
                 {
-                    Console.Write(">");
-                    scriptIn = ReadConsoleCommands();
-                }while (scriptIn.Execute());
+                    if (File.Exists(inputFile))
+                    {
+                        GlobalScope.InputReader = new FileLineInputReader(File.ReadAllLines(inputFile));
+                        while(GlobalScope.InputReader.GetString(out string line))
+                        {
+                            this.Execute(line);
+                        }
+                    }
+                }
             }
+            ICommand scriptIn;
+            GlobalScope.InputReader = new ConsoleInputReader();
+            do
+            {
+                Console.Write(">");
+                scriptIn = ReadConsoleCommands();
+            } while (scriptIn.Execute());
             return true;
         }
 
@@ -53,12 +66,13 @@ namespace EireScript
         private ICommand ReadConsoleCommands()
         {
             ICommand executableCommand = new CommandsRunner();
-
-            foreach(ICommand command in this.EvalCommands(Console.ReadLine()))
+            if(GlobalScope.InputReader.GetString(out string inputString))
             {
-                executableCommand.AddCommand(command);
+                foreach (ICommand command in this.EvalCommands(inputString))
+                {
+                    executableCommand.AddCommand(command);
+                }
             }
-
             return executableCommand;
         }
 

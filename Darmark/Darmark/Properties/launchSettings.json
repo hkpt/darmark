@@ -2,7 +2,7 @@
   "profiles": {
     "Darmark": {
       "commandName": "Project",
-      "commandLineArgs": "script"
+      "commandLineArgs": "script --input \"D:\\script1.txt\""
     }
   }
 }
