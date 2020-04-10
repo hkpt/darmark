@@ -21,6 +21,8 @@ jobs:
       working-directory: Darmark
       run: dotnet restore
     - name: Build
+      working-directory: Darmark
       run: dotnet build --configuration Release --no-restore
     - name: Test
+      working-directory: Darmark
       run: dotnet test --no-restore --verbosity normal
